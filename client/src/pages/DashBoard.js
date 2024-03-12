@@ -1,9 +1,8 @@
 import { useContext, useState, useEffect } from "react";
-import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
+import axios from "../Utility/axiosConfig";
+import { Link} from "react-router-dom";
 import { AppState } from "../App";
 import classes from "../pages/dashboard.module.css";
-import AskQuestion from "./AskQuestion";
 import LayOut from "../components/LayOut/LayOut";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
@@ -18,7 +17,7 @@ function DashBoard() {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          "http://localhost:5500/api/questions/all-questions",
+          "/questions/all-questions",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -61,7 +60,7 @@ function DashBoard() {
                         color: "gray",
                       }}
                     />
-                    <p className={classes.maped}>{question.title}</p>
+                    <p className={classes.mapped}>{question.title}</p>
                     <Link
                       onClick={() =>
                         localStorage.setItem(

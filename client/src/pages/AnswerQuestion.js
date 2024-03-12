@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import axios from "../Utility/axiosConfig";
 import classes from "../pages/answer.module.css";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LayOut from "../components/LayOut/LayOut";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
@@ -22,7 +22,7 @@ function AnswerQuestion() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        `http://localhost:5500/api/questions/all-questions`,
+        `/questions/all-questions`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -31,7 +31,8 @@ function AnswerQuestion() {
       );
 
       if (response.status === 200) {
-        setQuestion(response.data.question || "");
+        setQuestion(response.data);
+        console.log(response.data.question);
       } else {
         setMessage("Failed to fetch question.");
       }
@@ -47,7 +48,7 @@ function AnswerQuestion() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "http://localhost:5500/api/answers/all-answers",
+        "/answers/all-answers",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -57,7 +58,8 @@ function AnswerQuestion() {
       console.log(response.status, response);
 
       if (response.status === 200) {
-        setAnswers(response.data || []);
+        setAnswers(response.data);
+        console.log(response.data);
       } else {
         setMessage("Failed to fetch answers.");
       }
@@ -77,6 +79,7 @@ function AnswerQuestion() {
       const previouslyAnsweredQuestion = JSON.parse(
         previouslyAnsweredQuestionInfo
       );
+      console.log(previouslyAnsweredQuestion);
       setPreviouslyAnsweredQuestionId(previouslyAnsweredQuestion.questionid);
       console.log(previouslyAnsweredQuestion.questionid);
     }
@@ -95,7 +98,7 @@ function AnswerQuestion() {
     //  const token = localStorage.getItem("token");
 
      const response = await axios.post(
-       "http://localhost:5500/api/answers/answer-q",
+       "/answers/answer-q",
        {
          answer: answerValue,
          questionid: previouslyAnsweredQuestionId,
@@ -109,6 +112,7 @@ function AnswerQuestion() {
 
      if (response.status === 200) {
        setAnswer(response.data.answer);
+       console.log(response.data);
        setMessage("Answer submitted successfully.");
        setSuccess("Question answered successfully");
      }
@@ -162,6 +166,7 @@ function AnswerQuestion() {
                           }}
                         />
                         <div>
+                          <br/>
                           {ans.answer}
                           <br />
                         </div>
