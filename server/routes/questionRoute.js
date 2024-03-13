@@ -5,7 +5,11 @@ const dbconnection = require("../db/dbConfig");
 
 router.get("/all-questions", authMiddleware, async (req, res) => {
   try {
-    const query = "SELECT * FROM questions ";
+    const query = `
+      SELECT questions.*, users.username
+      FROM questions
+      JOIN users ON questions.userid = users.userid
+    `;
 
     const result = await dbconnection.query(query);
 

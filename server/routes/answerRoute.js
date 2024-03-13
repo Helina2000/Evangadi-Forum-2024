@@ -1,4 +1,3 @@
-//************* */
 const express = require("express");
 const router = express.Router();
 const dbconnection = require("../db/dbConfig");
@@ -6,7 +5,11 @@ const authMiddleware = require("../middleWare/authMiddleWare");
 
 router.get("/all-answers", authMiddleware, async (req, res) => {
   try {
-    const query = "SELECT * FROM answers";
+    const query = `
+      SELECT answers.*, users.username
+      FROM answers
+      JOIN users ON answers.userid = users.userid
+    `;
 
     const result = await dbconnection.query(query);
 

@@ -166,9 +166,10 @@ function AnswerQuestion() {
                           }}
                         />
                         <div>
-                          <br/>
+                          <br />
                           {ans.answer}
                           <br />
+                          <b>username:{ans.username}</b>
                         </div>
                       </div>
                     )

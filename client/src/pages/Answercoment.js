@@ -218,11 +218,11 @@
 //             {answers.map((ans, index) => (
 //               <div
 //                 key={index}
-//                 style={{
-//                   display: "flex",
-//                   alignItems: "center",
-//                   marginBottom: "10px",
-//                 }}
+                // style={{
+                //   display: "flex",
+                //   alignItems: "center",
+                //   marginBottom: "10px",
+                // }}
 //               >
 //                 <PersonPinIcon style={{ marginRight: "10px" }} />
 //                 <div>
